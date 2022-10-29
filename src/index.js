@@ -2,16 +2,20 @@ const express = require("express");
 const app = express();
 const port = 8000;
 const path = require("path");
-const viewspath = path.join(__dirname, "../views");
+const hbs = require("hbs");
 
+const templatePath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
+const staticPath = path.join(__dirname, "../public");
+
+hbs.registerPartials(partialsPath);
 app.set("view engine", "hbs");
-
-app.set("views", viewspath);
+app.set("views", templatePath);
 
 //app.use(express.static(staticPath));
 
 app.get("/", (req,res)=>{
-    res.render("index", {channelName: "Sarkhail"});
+    res.render("index");
 });
 app.get("/", (req,res)=>{
     res.send("Hellow world from sarkhail");
